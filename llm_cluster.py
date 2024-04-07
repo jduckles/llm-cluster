@@ -5,6 +5,7 @@ import numpy as np
 import sklearn.cluster
 import sqlite_utils
 import textwrap
+from random import sample as randsample
 
 DEFAULT_SUMMARY_PROMPT = """
 Short, concise title for this cluster of related documents.
@@ -21,6 +22,17 @@ def register_commands(cli):
         type=int,
         default=100,
         help="Truncate content to this many characters - 0 for no truncation",
+    )
+    @click.option(
+        "--sample_threshold",
+        type=int,
+        default=30000,
+        help="Character limit for each cluster's prompt at which to use a sampling approach to reduce prompt size"
+    @click.option(
+        "--sample",
+        type=int,
+        default=80,
+        help="Sample percentage to include, ie 80 for keep 80% and randomly drop 20%",
     )
     @click.option(
         "-d",
@@ -112,6 +124,9 @@ def register_commands(cli):
                 prompt_content = "\n".join(
                     [item["content"] for item in cluster["items"] if item["content"]]
                 )
+                if len(prompt_content) > sample_threshold:
+                    sampled_items = randsample(cluster["items"], int(len(cluster["items"]) * sample/100))
+                    prompt_content = [ item["content"] for item in sampled_items if item["content"]] 
                 if prompt_content.strip():
                     summary = model.prompt(
                         prompt_content,
