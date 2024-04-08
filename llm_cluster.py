@@ -28,6 +28,7 @@ def register_commands(cli):
         type=int,
         default=30000,
         help="Character limit for each cluster's prompt at which to use a sampling approach to reduce prompt size"
+    )
     @click.option(
         "--sample",
         type=int,
