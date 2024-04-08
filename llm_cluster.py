@@ -24,7 +24,7 @@ def register_commands(cli):
         help="Truncate content to this many characters - 0 for no truncation",
     )
     @click.option(
-        "--samplethreshold",
+        "--sample_threshold",
         type=int,
         default=30000,
         help="Character limit for each cluster's prompt at which to use a sampling approach to reduce prompt size",
@@ -49,7 +49,7 @@ def register_commands(cli):
     )
     @click.option("-m", "--model", help="LLM model to use for the summary")
     @click.option("--prompt", help="Custom prompt to use for the summary")
-    def cluster(collection, n, truncate, database, summary, model, prompt, samplethreshold, sample):
+    def cluster(collection, n, truncate, database, summary, model, prompt, sample_threshold, sample):
         """
         Generate clusters from embeddings in a collection
 
