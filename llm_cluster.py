@@ -24,10 +24,10 @@ def register_commands(cli):
         help="Truncate content to this many characters - 0 for no truncation",
     )
     @click.option(
-        "--sample_threshold",
+        "--samplethreshold",
         type=int,
         default=30000,
-        help="Character limit for each cluster's prompt at which to use a sampling approach to reduce prompt size"
+        help="Character limit for each cluster's prompt at which to use a sampling approach to reduce prompt size",
     )
     @click.option(
         "--sample",
