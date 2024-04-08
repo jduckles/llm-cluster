@@ -127,7 +127,9 @@ def register_commands(cli):
                 )
                 if len(prompt_content) > sample_threshold:
                     sampled_items = randsample(cluster["items"], int(len(cluster["items"]) * sample/100))
-                    prompt_content = [ item["content"] for item in sampled_items if item["content"]] 
+                    prompt_content = "\n".join(
+                        [ item["content"] for item in sampled_items if item["content"]] 
+                    )
                 if prompt_content.strip():
                     summary = model.prompt(
                         prompt_content,
