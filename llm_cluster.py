@@ -49,7 +49,7 @@ def register_commands(cli):
     )
     @click.option("-m", "--model", help="LLM model to use for the summary")
     @click.option("--prompt", help="Custom prompt to use for the summary")
-    def cluster(collection, n, truncate, database, summary, model, prompt):
+    def cluster(collection, n, truncate, database, summary, model, prompt, samplethreshold, sample):
         """
         Generate clusters from embeddings in a collection
 
